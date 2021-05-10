@@ -26,7 +26,15 @@ class GenCandle:
     MavgdmM=0
     mavgdmM=0
 
-    def __init__(self,open,close,maxC,minC,mMdistances,ocdistances):
+    lastClose=0     # last candle close value
+    bollBw=0        # Bollinger bands bandwidth
+
+    # mMdistances=lista delle distanze delle ombre dalle 20 candele precedenti
+    # ocdistances=lista delle distanze tra open e close dalle 20 candele precedenti
+    # lastClose=prezzo di chiusura dell'ultima candela chiusa
+    # bollBw=larghezza di banda delle bande di Bollinger
+
+    def __init__(self,open,close,maxC,minC,mMdistances,ocdistances,lastClose,bollBw):
 
         self.open=open
         self.close=close
@@ -45,18 +53,21 @@ class GenCandle:
         self.r=self.doc/self.dmM
         self.COR=self.calcCOR()
         self.CBR=self.calcCBR()
+        self.Tr=self.calcTr()
 
         self.MdmM=self.calcMdmM()
         self.mdmM=self.calcmdmM()
         self.avgdmM=self.calcavgdmM()
         self.MavgdmM=self.calcMavgdmM()
         self.mavgdmM=self.calcmavgdmM()
+        self.Mdoc=self.calcMdoc()
+        self.mdoc=self.calcmdoc()
+        self.avgdoc=self.calcavgdoc()
+        self.Mavgdoc=self.calcMavgdoc()
+        self.mavgdoc=self.calcmavgdoc()
 
-        self.Mdoc = self.calcMdoc()
-        self.mdoc = self.calcmdoc()
-        self.avgdoc = self.calcavgdoc()
-        self.Mavgdoc = self.calcMavgdoc()
-        self.mavgdoc = self.calcmavgdoc()
+        self.lastClose=lastClose
+        self.bollBw=bollBw
 
     def SR(self,bs,ts):
 
@@ -156,3 +167,28 @@ class GenCandle:
             return 4        # long range
         if ddoc==abs(self.doc-self.Mdoc):
             return 5        # very long range
+
+    def calcTr(self):
+
+        dPip=abs(self.close-self.lastClose)
+
+        if dPip>=40/(3*self.bollBw) and dPip<40/(2*self.bollBw):
+            return 5
+        if dPip>=40/(4*self.bollBw) and dPip<40/(3*self.bollBw):
+            return 4
+        if dPip>=40/(6*self.bollBw) and dPip<40/(4*self.bollBw):
+            return 3
+        if dPip>=40/(18*self.bollBw) and dPip<40/(6*self.bollBw):
+            return 2
+        if dPip>=0 and dPip<40/(18*self.bollBw):
+            return 1
+        if dPip>=-40/(18*self.bollBw) and dPip<0:
+            return -1
+        if dPip>=-40/(6*self.bollBw) and dPip<-40/(18*self.bollBw):
+            return -2
+        if dPip>=-40/(4*self.bollBw) and dPip<-40/(6*self.bollBw):
+            return -3
+        if dPip>=-40/(3*self.bollBw) and dPip<-40/(4*self.bollBw):
+            return -4
+        if dPip>=-40/(2*self.bollBw) and dPip<-40/(3*self.bollBw):
+            return -5
