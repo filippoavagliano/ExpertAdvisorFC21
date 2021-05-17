@@ -1,4 +1,5 @@
-import OneCandlePattern
+import OnePatternDetector
+
 class PatternDetector:
 
     candleVector=[]
@@ -10,8 +11,4 @@ class PatternDetector:
 
     def determinePatterns(self, candlevVec):
 
-        OneCandlePattern.determinePattern(candlevVec)
-
-
-
-
+        OnePatternDetector.determinePattern(candlevVec)
