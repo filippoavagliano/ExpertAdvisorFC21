@@ -1,5 +1,7 @@
 import MetaTrader5 as mt5
 import pandas as pd
+import PatternDetector
+import GenCandle
 
 
 def mt5_connect():
@@ -35,10 +37,14 @@ def main():
     print("Stampo le ultime {} candele".format(num_of_candles))
     print(df)
 
-    open = df['open'][0]
-    close = df['close'][0]
+    open = df['open'][7]
+    close = df['close'][7]
 
     print("open:", open, "close:", close, "diff:", open - close)
+
+    for candle in df:
+        GenCandle.__init__(candle['open'],candle['close'],candle['max'],candle['min'])
+    PatternDetector.determinatePatterns(df)
 
 
 if __name__ == '__main__':

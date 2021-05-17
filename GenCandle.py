@@ -98,6 +98,7 @@ class GenCandle:
 
     def calcMdmM(self):      # max of the last 20 shadow distances
 
+
         return max(self.mMdistances)
 
     def calcmdmM(self):     # min of the last 20 shadow distances
@@ -222,3 +223,6 @@ class GenCandle:
             return 14                                                                                       # 14-Reversal Bearish Paper Umbrella
         if (self.CBR>=1 and self.CBR<=4) and (self.boc<self.bmM) and self.S==-2 and self.open>self.close:
             return 15                                                                                       # 15-Reversal Bullish Paper Umbrella
+
+    def getEMA(self):
+        return self.EMAvalue

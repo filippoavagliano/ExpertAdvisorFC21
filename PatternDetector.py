@@ -1,3 +1,4 @@
+import OneCandlePattern
 class PatternDetector:
 
     candleVector=[]
@@ -7,5 +8,10 @@ class PatternDetector:
         if len(self.candleVector)==8: self.candleVector.pop(0)
         self.candleVector.append(genCandle)
 
-    def determinePatterns(self):
+    def determinePatterns(self, candlevVec):
+
+        OneCandlePattern.determinePattern(candlevVec)
+
+
+
 
