@@ -1,6 +1,6 @@
 class TwoPatternDetector:
 
-    def determinePattern(self, candleVector):
+    def determinePattern(self, candleVector, type):
 
         vector = candleVector[-1:-5]
 

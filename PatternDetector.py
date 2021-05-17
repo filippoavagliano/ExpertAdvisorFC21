@@ -1,8 +1,12 @@
+import GenCandle
 import OnePatternDetector
+import TwoPatternDetector
+
 
 class PatternDetector:
 
     candleVector=[]
+    patternNames=[]
 
     def addCandleToVector(self, genCandle):
 
@@ -11,4 +15,6 @@ class PatternDetector:
 
     def determinePatterns(self, candlevVec):
 
-        OnePatternDetector.determinePattern(candlevVec)
+        g: GenCandle=candlevVec[7]
+        OnePatternDetector.determinePattern(candlevVec,g.candleType)
+        TwoPatternDetector.determinePattern(candlevVec, g.candleType)
