@@ -206,8 +206,8 @@ class GenCandle:
         if self.CBR>=4: return 1                                                                            # 1-Long range
         if self.CBR<=2: return 2                                                                            # 2-Short range
         if self.doc/self.dmM>0.8: return 3                                                                  # 3-Marubozu
-        if self.CBR==5 and self.bs>=(2*self.ts): return 4                                                   # 4-Closing Bullish Marubozu/Opening Bearish Marubozu
-        if self.CBR==5 and self.ts>=(2*self.bs): return 5                                                   # 5-Closing Bearish Marubozu/Opening Bullish Marubozu
+        if self.CBR==5 and self.bs>=(2*self.ts): return 4                                                   # 4-Closing Bearish Marubozu/Opening Bullish Marubozu
+        if self.CBR==5 and self.ts>=(2*self.bs): return 5                                                   # 5-Closing Bullish Marubozu/Opening Bearish Marubozu
         if (self.CBR>1 and self.CBR<=3) and (self.S>=-1 and self.S<=1): return 6                            # 6-Spinning top
         if self.CBR==1: return 7                                                                            # 7-Doji
         if self.CBR==1 and (self.S>=-1 and self.S<=1): return 8                                             # 8-Long-legged body
@@ -215,10 +215,10 @@ class GenCandle:
         if self.CBR==1 and self.S<=-1: return 10                                                            # 10-Dragonfly Doji
         if self.CBR==1 and self.S==0: return 11                                                             # 11-Four Price Doji
         if (self.CBR>=1 and self.CBR<=4) and (self.boc>self.bmM) and self.S==-2 and self.open<self.close:
-            return 12                                                                                       # 12-Bullish Paper Umbrella
+            return 12                                                                                       # 12-Bearish Paper Umbrella
         if (self.CBR>=1 and self.CBR<=4) and (self.boc>self.bmM) and self.S==-2 and self.open>self.close:
-            return 13                                                                                       # 13-Bearish Paper Umbrella
+            return 13                                                                                       # 13-Bullish Paper Umbrella
         if (self.CBR>=1 and self.CBR<=4) and (self.boc<self.bmM) and self.S==-2 and self.open<self.close:
-            return 14                                                                                       # 14-Reversal Bullish Paper Umbrella
+            return 14                                                                                       # 14-Reversal Bearish Paper Umbrella
         if (self.CBR>=1 and self.CBR<=4) and (self.boc<self.bmM) and self.S==-2 and self.open>self.close:
-            return 15                                                                                       # 15-Reversal Bearish Paper Umbrella
+            return 15                                                                                       # 15-Reversal Bullish Paper Umbrella

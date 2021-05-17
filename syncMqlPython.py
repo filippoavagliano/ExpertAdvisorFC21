@@ -20,7 +20,7 @@ def get_last_candles(symbol: str, timeframe: any, num_candles: int) -> pd.DataFr
     :return: restituisce le ultime num_candles candele
     """
     mt5_connect()
-    rates = mt5.copy_rates_from_pos(symbol, timeframe, 0, num_candles)
+    rates = mt5.copy_rates_from_pos(symbol, timeframe, 1, num_candles)
     mt5_disconnect()
     return pd.DataFrame(rates)
 
@@ -28,7 +28,7 @@ def get_last_candles(symbol: str, timeframe: any, num_candles: int) -> pd.DataFr
 def main():
     symbol = "EURUSD"
     timeframe = mt5.TIMEFRAME_H1
-    num_of_candles = 3
+    num_of_candles = 8
 
     df = get_last_candles(symbol, timeframe, num_of_candles)
 
