@@ -5,7 +5,7 @@ class OnePatternDetector:
         vector=candleVector[-1:-4]
         type=vector[3].candleType
 
-        if type==12 and type==13:
+        if type==12 or type==13:
             if vector[3].EMAvalue <= vector[2].EMAvalue <= vector[1].EMAvalue <= vector[0].EMAvalue:
                 vector[3].P.append(24)      # Hammer
                 return
