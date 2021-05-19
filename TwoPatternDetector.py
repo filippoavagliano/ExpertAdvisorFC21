@@ -1,8 +1,9 @@
 class TwoPatternDetector:
 
-    def determinePattern(self, candleVector, type):
+    def determinePattern(self, candleVector):
 
         vector = candleVector[-1:-5]
+        type = vector[4].candleType
 
         if ((vector[4].CBR >=2 and vector[4].CBR <= 3) and vector[3].CBR >= 4
                     and vector[4].mb > vector[3].close and vector[3].open < vector[3].close):

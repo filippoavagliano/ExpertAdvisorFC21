@@ -1,8 +1,9 @@
 class OnePatternDetector:
 
-    def determinePattern(self, candleVector, type):
+    def determinePattern(self, candleVector):
 
         vector=candleVector[-1:-4]
+        type=vector[3].candleType
 
         if type==12 and type==13:
             if vector[3].EMAvalue <= vector[2].EMAvalue <= vector[1].EMAvalue <= vector[0].EMAvalue:
