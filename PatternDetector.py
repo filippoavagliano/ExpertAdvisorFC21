@@ -10,5 +10,5 @@ class PatternDetector:
         self.candleVector.append(genCandle)
 
     def determinePatterns(self, candlevVec):
-        OnePatternDetector.determinePattern(candlevVec)
+        OnePatternDetector.determinePattern()
         TwoPatternDetector.determinePattern()
