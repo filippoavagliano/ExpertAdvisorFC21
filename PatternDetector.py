@@ -1,4 +1,3 @@
-import GenCandle
 from OnePatternDetector import OnePatternDetector
 from TwoPatternDetector import TwoPatternDetector
 
@@ -12,4 +11,4 @@ class PatternDetector:
 
     def determinePatterns(self, candlevVec):
         OnePatternDetector.determinePattern(candlevVec)
-        TwoPatternDetector.determinePattern(candlevVec)
+        TwoPatternDetector.determinePattern()
