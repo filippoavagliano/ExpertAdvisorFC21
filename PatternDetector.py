@@ -1,6 +1,7 @@
 from OnePatternDetector import OnePatternDetector
 from TwoPatternDetector import TwoPatternDetector
 
+
 class PatternDetector:
     candleVector = []
     patternNames = []
@@ -9,6 +10,7 @@ class PatternDetector:
         if len(self.candleVector) == 8: self.candleVector.pop(0)
         self.candleVector.append(genCandle)
 
-    def determinePatterns(self, candlevVec):
-        OnePatternDetector.determinePattern()
-        TwoPatternDetector.determinePattern()
+    @staticmethod
+    def determinePatterns(candleVec):
+        OnePatternDetector.determinePattern(candleVec)
+        TwoPatternDetector.determinePattern(candleVec)
