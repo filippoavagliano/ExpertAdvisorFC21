@@ -14,20 +14,88 @@ class TwoPatternDetector:
 
             if type == 1:
 
-                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[
-                    4].EMAvalue)
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
                         and vector[3].CBR <= 3 and vector[4] >= 4 and vector[3].open < vector[4].close
                         and vector[3].close > vector[4].open and vector[3].open > vector[3].close and vector[4].open <
                         vector[4].close):
                     vector[4].P.append(28)  # Bullish Engulfing
                     return
 
-                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[
-                    0].EMAvalue)
+                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[0].EMAvalue)
                         and vector[3].CBR <= 3 and vector[4] >= 4 and vector[3].open < vector[3].close
                         and vector[4].close > vector[4].open and vector[4].open > vector[3].close and vector[3].open >
                         vector[4].close):
                     vector[4].P.append(29)  # Bearish Engulfing
+                    return
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
+                        and vector[4].open < vector[3].minC and vector[4].close > vector[3].boc):
+                    vector[4].P.append(36)  # Piercing Line
+                    return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open > vector[4].close
+                        and vector[4].open > vector[3].minC and vector[4].close < vector[3].boc):
+                    vector[4].P.append(37)  # Red cloud cover
+                    return
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
+                        and abs(vector[3].close - vector[4].close) <= 0.1):  # capire cosa vuol dire min[doc(t-1),doc(t)]
+                    vector[4].P.append(40)  # Bullish Meeting Line
+                    return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open > vector[4].close
+                        and abs(vector[3].close - vector[4].close) <= 0.1):  # capire cosa vuol dire min[doc(t-1),doc(t)]
+                    vector[4].P.append(41)  # Bearish Meeting Line
+                    return
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
+                        and vector[4].open >= vector[3].close and vector[4].close > vector[3].maxC and vector[3].boc < vector[4].boc):
+                    vector[4].P.append(48)  # One Green Soldier
+                    return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open > vector[4].close
+                        and vector[4].open <= vector[3].close and vector[4].close < vector[3].minC and vector[3].boc > vector[4].boc):
+                    vector[4].P.append(49)  # One Red Crow
+                    return
+
+
+            if (vector[4].CBR >=2):
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open > vector[4].close
+                        and vector[3].close < vector[4].open < vector[3].open and vector[3].close < vector[4].close < vector[3].open):
+                    # opzionali M(t) < o(t-1) e m(t) > c(t-1)
+                    vector[4].P.append[42]  # Homing Pigeon
+                    return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open < vector[4].close
+                        and vector[3].open < vector[4].open < vector[3].close and vector[3].open < vector[4].close < vector[3].close):
+                    vector[4].P.append[43]  # Descending Hawk
+                    return
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open > vector[4].close
+                        and vector[3].close < vector[4].open < vector[3].open and abs(vector[3].close - vector[4].close) <= 0.1 * vector[4].doc
+                        and vector[3].doc > vector[4].doc and abs(vector[3].close - vector[3].minC) <= 0.15 * vector[3].dmM
+                        and abs(vector[4].close - vector[4].minC) <= 0.15 * vector[4].dmM):
+                    # opzionali M(t) < o(t-1) e m(t) > c(t-1)
+                    vector[4].P.append[44]  # Matching Low
+                    return
+
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open < vector[4].close
+                        and vector[3].open < vector[4].open < vector[3].close and abs(vector[3].close - vector[4].close) <= 0.1 * vector[4].doc
+                        and vector[3].doc > vector[4].doc and abs(vector[3].close - vector[3].maxC) <= 0.15 * vector[3].dmM
+                        and abs(vector[4].close - vector[4].maxC) <= 0.15 * vector[4].dmM):
+                    # opzionali M(t) < o(t-1) e m(t) > c(t-1)
+                    vector[4].P.append[45]  # Matching High
                     return
 
             if 2 <= vector[4].CBR <= 3:
@@ -44,47 +112,72 @@ class TwoPatternDetector:
 
             if vector[4].CBR <= 3:
 
-                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[
-                    4].EMAvalue)
-                        and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open > vector[4].close and vector[
-                            3].close < vector[4].open
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open > vector[4].close and vector[3].close < vector[4].open
                         and vector[3].open > vector[3].close and vector[4].open < vector[4].close):
                     vector[4].P.append(30)  # Bullish Harami
                     return
 
-                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[
-                    0].EMAvalue)
-                        and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open < vector[4].close and vector[
-                            3].close > vector[4].open
+                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[0].EMAvalue)
+                        and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open < vector[4].close and vector[3].close > vector[4].open
                         and vector[3].open < vector[3].close and vector[4].open > vector[4].close):
                     vector[4].P.append(31)  # Bearish Harami
                     return
 
             if type == 7:
 
-                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[
-                    4].EMAvalue)
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
                         and vector[3].CBR >= 4 and vector[4].candleType == 7 and vector[4].dmM < vector[3].doc and
                         vector[3].open > vector[3].close):
                     vector[4].P.append(32)  # Bullish Cross Harami
                     return
 
-                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[
-                    0].EMAvalue)
+                if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[0].EMAvalue)
                         and vector[3].CBR >= 4 and vector[4].candleType == 7 and vector[4].dmM < vector[3].doc and
                         vector[3].open < vector[3].close):
                     vector[4].P.append(33)  # Bearish Cross Harami
                     return
 
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+                        and vector[3].CBR >= 4 and vector[3].open > vector[3].close and vector[4].open < vector[3].close):
+                    vector[4].P.append(32)  # Bullish Doji Star
+                    return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and vector[3].CBR >= 4 and vector[3].open < vector[3].close and vector[4].open > vector[3].close):
+                    vector[4].P.append(32)  # Bearish Doji Star
+                    return
+
             if type == 14 or type == 15:
 
-                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[
-                    4].EMAvalue)
+                if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
                         and (vector[4].candleType == 14 or vector[4].candleType == 15) and vector[4].CBR >= 1 and
                         vector[4].CBR <= 3
                         and vector[4].boc < vector[4].bmM and vector[4].S <= -1 and (
                                 (vector[4].mb - 0.1 * vector[4].doc) <= vector[4].minC <= vector[4].Mb)
-                        and vector[3].doc > vector[4].doc and vector[4].CBR >= 2 and vector[4].CBR <= 4 and vector[
-                            4].Mb < vector[3].close):
+                        and vector[3].doc > vector[4].doc and vector[3].CBR >= 2 and vector[3].CBR <= 4 and vector[4].Mb < vector[3].close):
                     vector[4].P.append(34)  # Inverted Hammer
                     return
+
+                if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+                        and (vector[4].candleType == 14 or vector[4].candleType == 15) and vector[4].CBR >= 1 and
+                        vector[4].CBR <= 3
+                        and vector[4].boc < vector[4].bmM and vector[4].S <= -1 and (
+                                (vector[4].mb - 0.1 * vector[4].doc) <= vector[4].minC <= vector[4].Mb)
+                        and vector[3].doc < vector[4].doc and vector[3].CBR >= 2 and vector[3].CBR <= 4 and vector[4].Mb > vector[3].close):
+                    vector[4].P.append(34)  # Shooting Star
+                    return
+
+            if type == 3 or type == 4 or type == 5:
+
+                if (vector[3].candleType == 3 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
+                        and vector[3].open < vector[4].open and vector[3].doc < vector[4].doc):
+                    vector[4].P.append(46)  # Bullish Kicking
+                    return
+
+                if (vector[3].candleType == 3 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
+                        and vector[3].open < vector[4].open and vector[3].doc < vector[4].doc):
+                    vector[4].P.append(46)  # Bearish Kicking
+                    return
+
+
