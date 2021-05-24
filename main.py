@@ -11,8 +11,8 @@ def main():
 
     candles = get_last_candles(num_of_candles, symbol, timeframe)
 
-    last_candle = candles[0]
-    last_20_candles = candles[1:21]
+    last_candle = candles[-1]
+    last_20_candles = candles[-20:-1]
 
     # GenCandle(c.open, c.close,
     #           c.high, c.low,

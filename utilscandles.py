@@ -25,20 +25,24 @@ def get_ocdistances(candles: List[Candle]):
 
 def extract_last_candles(df: pandas.DataFrame, n: int) -> List[Candle]:
     """
-    Restituisce una lista di Candle
+    Restituisce una lista di Candle.
+    La candela più recente è in ultima posizione.
     :param df: Dataframe da cui le candele sono estratte
     :param n: numero di candele da estrarre
     """
-    return [Candle.from_pandas_row(df.iloc[-i]) for i in range(1, n + 1)]
+    # [Candle.from_pandas_row(df.iloc[-i]) for i in range(1, n + 1)] # reverse order
+    return [Candle.from_pandas_row(df.iloc[i]) for i in range(n)]
 
 
 def get_last_candles(n: int, symbol: str, timeframe: any) -> List[Candle]:
     """
-    Restituisce una lista di Candle richiamando direttamente MetaTrader 5
+    Restituisce una lista di Candle richiamando direttamente MetaTrader 5.
+    La candela più recente è in ultima posizione.
     :param n: numero di candele da restituire
     :param symbol:
     :param timeframe:
     :return:
     """
     df = get_bars(symbol, timeframe, n)
-    return [Candle.from_pandas_row(df.iloc[-i]) for i in range(1, n + 1)]
+    # [Candle.from_pandas_row(df.iloc[-i]) for i in range(1, n + 1)] # reverse order
+    return [Candle.from_pandas_row(df.iloc[i]) for i in range(n)]
