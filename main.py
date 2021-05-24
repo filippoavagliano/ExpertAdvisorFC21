@@ -1,7 +1,9 @@
 import MetaTrader5 as mt5
 import PatternDetector
 import GenCandle
-from utilscandles import get_last_candles
+from mt5api import get_bars
+from utils import get_ema, get_bollinger_band
+from utilscandles import get_last_candles, extract_last_candles
 
 
 def main():
@@ -9,17 +11,21 @@ def main():
     timeframe = mt5.TIMEFRAME_H1
     num_of_candles = 25
 
-    candles = get_last_candles(num_of_candles, symbol, timeframe)
+    bars = get_bars(symbol, timeframe, num_of_candles)
+    candles = extract_last_candles(bars, num_of_candles)
 
-    last_candle = candles[0]
-    last_20_candles = candles[1:21]
+    last_candle = candles[-1]
+    last_20_candles = candles[-20:-1]
+
+    # bande di bollinger
+    sma, lower, upper = get_bollinger_band(bars, 20)
 
     # GenCandle(c.open, c.close,
     #           c.high, c.low,
     #           get_mMdistances(last_20_candles),
     #           get_ocdistances(last_20_candles),
-    #           None, # TODO Implementare metodo per calcolare bollBw
-    #           None) # TODO Richiamare get_ema()
+    #           None,
+    #           get_ema(last_20_candles, 20))
 
     # TODO Codice da rivedere
     # for candle in candles:
