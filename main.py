@@ -1,6 +1,7 @@
 import MetaTrader5 as mt5
 import PatternDetector
 import GenCandle
+from utils import get_ema
 from utilscandles import get_last_candles
 
 
@@ -13,13 +14,13 @@ def main():
 
     last_candle = candles[-1]
     last_20_candles = candles[-20:-1]
-
+    
     # GenCandle(c.open, c.close,
     #           c.high, c.low,
     #           get_mMdistances(last_20_candles),
     #           get_ocdistances(last_20_candles),
     #           None, # TODO Implementare metodo per calcolare bollBw
-    #           None) # TODO Richiamare get_ema()
+    #           get_ema(last_20_candles, 20))
 
     # TODO Codice da rivedere
     # for candle in candles:
