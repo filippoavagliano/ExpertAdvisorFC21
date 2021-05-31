@@ -224,3 +224,34 @@ class ThreePatternDetector:
                 and vector[2].dmM > vector[3].dmM > vector[4].dmM and vector[5].close < vector[2].minC):
             vector[5].P.append(80)  # Bearish squeeze alert
             return
+
+
+        # Pattern di continuazione
+
+        if (((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue) or None)
+            and vector[3].CBR >= 2
+            and vector[3].open < vector[3].close
+            and vector[4].minC > vector[3].maxC
+            and vector[4].open < vector[4].close
+            and vector[5].open > vector[5].close
+            and vector[4].open < vector[5].open < vector[4].close
+            and vector[3].maxC < vector[5].close < vector[4].close
+            and vector[3].boc < vector[4].boc):
+            vector[5].P.append(98)          #Upside Tasuki gap
+
+
+        if (((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue) or None)
+            and vector[3].CBR >= 2
+            and vector[3].open > vector[3].close
+            and vector[4].maxC < vector[3].minC
+            and vector[4].open > vector[4].close
+            and vector[5].open < vector[5].close
+            and vector[4].close < vector[5].open < vector[4].open
+            and vector[4].maxC < vector[5].close < vector[3].minC
+            and vector[3].boc < vector[4].boc):
+            vector[5].P.append(98)  # Downside Tasuki gap
+
+
+
+
+
