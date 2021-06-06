@@ -249,7 +249,98 @@ class ThreePatternDetector:
             and vector[4].close < vector[5].open < vector[4].open
             and vector[4].maxC < vector[5].close < vector[3].minC
             and vector[3].boc < vector[4].boc):
-            vector[5].P.append(98)  # Downside Tasuki gap
+            vector[5].P.append(99)  # Downside Tasuki gap
+
+        if (((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue) or None)
+            and vector[3].CBR >= 2
+            and vector[3].open < vector[3].close
+            and vector[4].open >= vector[3].maxC
+            and vector[4].open < vector[4].close
+            and vector[5].open < vector[5].close
+            and vector[5].open < vector[4].close
+            and abs(vector[5].open - vector[4].open) < (vector[4].doc / 2)
+            and vector[3].boc < vector[4].boc):
+            vector[5].P.append(100)         #Side by side green line Bullish
+
+        if (((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue) or None)
+            and vector[3].CBR >= 2
+            and vector[3].open > vector[3].close
+            and vector[4].open <= vector[3].minC
+            and vector[4].open < vector[4].close
+            and vector[5].open < vector[5].close
+            and vector[5].open >= vector[4].open
+            and abs(vector[5].close - vector[4].close) < (vector[4].doc / 2)
+            and vector[3].boc > vector[4].boc):
+            vector[5].P.append(101)            #Side by side green lines Bearish
+
+        if (((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue) or None)
+            and vector[3].CBR >= 2
+            and vector[3].open < vector[3].close
+            and vector[4].open > vector[4].close
+            and vector[4].open > vector[3].close
+            and vector[4] >= vector[3].close
+            and vector[5].open > vector[4].boc
+            and vector[5].open > vector[4].close
+            and vector[5].close >= vector[3].close
+            and vector[3].boc < vector[4].boc):
+            vector[5].P.append(102)         # Side by side red lines Bullish
+
+        if (((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue) or None)
+            and vector[3] >= 2
+            and vector[3].open > vector[3].close
+            and vector[4].open > vector[4].close
+            and vector[4].open < vector[3].close
+            and vector[5].open > vector[4].boc
+            and vector[5].open > vector[5].close
+            and vector[5].close < vector[3].close
+            and vector[3].boc > vector[4].boc):
+            vector[5].P.append(103)         #Side by side red lines Bearish
+
+        if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+            and vector[3].CBR >= 4
+            and vector[4].CBR >= 2
+            and vector[3].open < vector[3].close
+            and vector[4].open < vector[4].close
+            and vector[4].open > vector[3].maxC
+            and vector[4].close > vector[3].close
+            and vector[4].open < vector[5].open < vector[4].close
+            and vector[5].open > vector[5].close
+            and vector[5].close < vector[3].boc
+            and vector[5].boc < vector[4].boc):
+            vector[5].P.append(104)         #Upside three methods bullish
+
+        if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+            and vector[3].CBR >= 4
+            and vector[4].CBR >= 2
+            and vector[3].open > vector[3].close
+            and vector[4].open > vector[4].close
+            and vector[4].open < vector[3].minC
+            and vector[5].open < vector[5].close
+            and vector[4].close < vector[5].open < vector[4].open
+            and vector[5].close > vector[3].close
+            and vector[5].boc > vector[4].boc):
+            vector[5].P.append(105)         #Downside three methods Bearish
+
+        if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
+            and vector[3].CBR >= 4
+            and vector[3].open < vector[3].close
+            and vector[3].dmM > (sum(vector[2].dmM, vector[1].dmM, vector[0].dmM) / 3)   # ???
+            and vector[4].dmM < 0.75 * vector[3].dmM
+            and vector[5].dmM < 0.75 * vector[3].dmM
+            and vector[4].CBR <= 3
+            and vector[5].CBR <= 3
+            and vector[4] > vector[3].bmM
+            and vector[5].close > vector[3].bmM
+            and vector[5].minC > vector[3].bmM
+            and vector[4].maxC > vector[3].close
+            and vector[4].minC < vector[3].maxC
+            and vector[5].open < vector[4].maxC
+            and vector[5].close < vector[4].maxC):
+            vector[5].P.append(106)         #Rest after battle
+
+
+
+
 
 
 
