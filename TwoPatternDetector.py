@@ -3,7 +3,7 @@ class TwoPatternDetector:
     @staticmethod
     def determinePattern(candleVector):
 
-        vector = candleVector[-1:-5]
+        vector = candleVector[3:7]
         type = vector[4].candleType
         foundFirstPattern = 0
 

@@ -1,9 +1,8 @@
 class FivePatternDetector:
 
     @staticmethod
-    def determinePattern(candleVector):
+    def determinePattern(vector):
 
-        vector = candleVector[-1:-8]
         type = vector[7].candleType
 
         if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue >= vector[5].EMAvalue >= vector[6].EMAvalue >= vector[7].EMAvalue)

@@ -9,17 +9,19 @@ from utilscandles import get_last_candles, extract_last_candles
 def main():
     symbol = "EURUSD"
     timeframe = mt5.TIMEFRAME_H1
-    num_of_candles = 25
+    num_of_candles = 29
 
     bars = get_bars(symbol, timeframe, num_of_candles)
     candles = extract_last_candles(bars, num_of_candles)
 
-    last_candle = candles[-1]
+    last_candle = candles[-2]
     last_20_candles = candles[-20:-1]
 
     # bande di bollinger
     sma, lower, upper = get_bollinger_band(bars, 20)
 
+    for i in range(-):
+        with candles[i] as c:
     # GenCandle(c.open, c.close,
     #           c.high, c.low,
     #           get_mMdistances(last_20_candles),
