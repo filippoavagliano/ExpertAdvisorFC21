@@ -168,7 +168,7 @@ class ThreePatternDetector:
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
                 and (vector[4].P[1] == 29) and vector[5].open > vector[5].close and vector[5].close < vector[4].mb
                 and vector[4].boc > vector[5].boc):
-            vector[5].P.append(74)  # Three outside down
+            vector[5].P.append(74)          # Three outside down
             return
 
         if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
@@ -179,7 +179,7 @@ class ThreePatternDetector:
                 and vector[3].minC < vector[4].minC < vector[5].minC
                 and vector[3].maxC > vector[4].maxC > vector[5].maxC
                 and vector[5].candleType == 5 and (vector[4].minC < vector[5].minC < vector[5].maxC < vector[4].maxC)):
-            vector[5].P.append(75)              # Three stars in the south
+            vector[5].P.append(75)          # Three stars in the south
             return
 
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
@@ -206,7 +206,7 @@ class ThreePatternDetector:
                 and vector[4].open > vector[4].close and (vector[5].candleType == 5 or 1)
                 and vector[5].close > vector[5].open and abs(vector[3].maxC - vector[5].maxC) <= 0.1 * ((vector[3].boc + vector[4].boc + vector[5].boc) / 3)
                 and vector[4].boc < vector[3].boc and vector[4].close < vector[3].open and vector[5].open < vector[4].close):
-            vector[5].P.append(78)  # Bearish Stick sandwich
+            vector[5].P.append(78)          # Bearish Stick sandwich
             return
 
         if ( ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue) or None)
@@ -222,7 +222,7 @@ class ThreePatternDetector:
                 and vector[2].minC < (max(vector[3].open, vector[3].close)) < vector[2].maxC
                 and vector[3] < max(vector[4].open, vector[4].close) < vector[3].maxC
                 and vector[2].dmM > vector[3].dmM > vector[4].dmM and vector[5].close < vector[2].minC):
-            vector[5].P.append(80)  # Bearish squeeze alert
+            vector[5].P.append(80)          # Bearish squeeze alert
             return
 
 
@@ -249,7 +249,7 @@ class ThreePatternDetector:
                 and vector[4].close < vector[5].open < vector[4].open
                 and vector[4].maxC < vector[5].close < vector[3].minC
                 and vector[3].boc < vector[4].boc):
-            vector[5].P.append(99)  # Downside Tasuki gap
+            vector[5].P.append(99)          # Downside Tasuki gap
 
         if (((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue) or None)
                 and vector[3].CBR >= 2
@@ -271,7 +271,7 @@ class ThreePatternDetector:
                 and vector[5].open >= vector[4].open
                 and abs(vector[5].close - vector[4].close) < (vector[4].doc / 2)
                 and vector[3].boc > vector[4].boc):
-            vector[5].P.append(101)            #Side by side green lines Bearish
+            vector[5].P.append(101)         #Side by side green lines Bearish
 
         if (((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue) or None)
                 and vector[3].CBR >= 2
