@@ -1,9 +1,9 @@
 import MetaTrader5 as mt5
-import PatternDetector
+from PatternDetector import addCandleToVector, determinePatterns
 import GenCandle
 from mt5api import get_bars
 from utils import get_ema, get_bollinger_band
-from utilscandles import get_last_candles, extract_last_candles
+from utilscandles import get_last_candles, extract_last_candles, get_ocdistances, get_mMdistances
 
 
 def main():
@@ -14,25 +14,24 @@ def main():
     bars = get_bars(symbol, timeframe, num_of_candles)
     candles = extract_last_candles(bars, num_of_candles)
 
-    last_candle = candles[-2]
-    last_20_candles = candles[-20:-1]
+    last_candles = candles[:-1]
 
     # bande di bollinger
     sma, lower, upper = get_bollinger_band(bars, 20)
 
-    for i in range(-):
-        with candles[i] as c:
-    # GenCandle(c.open, c.close,
-    #           c.high, c.low,
-    #           get_mMdistances(last_20_candles),
-    #           get_ocdistances(last_20_candles),
-    #           None,
-    #           get_ema(last_20_candles, 20))
+    for i in range(-8,0):
+        with last_candles[i] as c:
+            g=GenCandle(c.open, c.close,
+               c.high, c.low,
+               get_mMdistances(last_candles[i-20:i-1]),
+               get_ocdistances(last_candles[i-20:i-1]),
+               last_candles[i-1].close,
+               None,
+               get_ema(last_candles[i-20:i-1], 20))
+            addCandleToVector(g)
 
-    # TODO Codice da rivedere
-    # for candle in candles:
-    #     GenCandle.__init__(candle['open'], candle['close'], candle['max'], candle['min'])
-    # PatternDetector.determinatePatterns(df)
+    determinePatterns()
+
 
 
 if __name__ == '__main__':
