@@ -14,10 +14,13 @@ def main():
     bars = get_bars(symbol, timeframe, num_of_candles)
     candles = extract_last_candles(bars, num_of_candles)
 
+    bars = bars[:-1]
     last_candles = candles[:-1]
 
+    print(bars)
     # bande di bollinger
-    sma, lower, upper = get_bollinger_band(bars, 20)
+    _, lower, upper = get_bollinger_band(bars, 20)
+    print(lower)
 
     for i in range(-8,0):
         c=last_candles[i]
@@ -26,7 +29,7 @@ def main():
                get_mMdistances(last_candles[i-20:i-1]),
                get_ocdistances(last_candles[i-20:i-1]),
                last_candles[i-1].close,
-               None,
+               upper[i]-lower[i],
                get_ema(last_candles[i-20:i-1], 18))
         addCandleToVector(g)
 
