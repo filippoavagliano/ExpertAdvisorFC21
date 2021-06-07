@@ -37,7 +37,7 @@ class FourPatternDetector:
             and abs(max(vector[3].open), vector[3].close - min(vector[4].open, vector[4].close)) > 0.1 * vector[3].dmM
             and abs(max(vector[4].open, vector[4].close) - vector[5].open) > 0.1 * vector[4].dmM
             and abs(vector[5].close - vector[6].open) > 0.1 * vector[5].dmM):
-            vector[6].P.append(89)  # Three Gaps Up
+            vector[6].P.append(89)              # Three Gaps Up
 
 
 
