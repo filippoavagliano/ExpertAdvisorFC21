@@ -42,13 +42,13 @@ class TwoPatternDetector:
 
                 if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
                         and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open < vector[4].close
-                        and abs(vector[3].close - vector[4].close) <= 0.1):  # capire cosa vuol dire min[doc(t-1),doc(t)]
+                        and abs(vector[3].close - vector[4].close) <= 0.1 * min(vector[3].doc, vector[4].doc)):
                     vector[4].P.append(40)  # Bullish Meeting Line
                     return
 
                 if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
                         and vector[3].candleType == 1 and vector[3].open < vector[3].close and vector[4].open > vector[4].close
-                        and abs(vector[3].close - vector[4].close) <= 0.1):  # capire cosa vuol dire min[doc(t-1),doc(t)]
+                        and abs(vector[3].close - vector[4].close) <= 0.1 * min(vector[3].doc, vector[4].doc)):
                     vector[4].P.append(41)  # Bearish Meeting Line
                     return
 
@@ -89,8 +89,8 @@ class TwoPatternDetector:
 
                 if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
                         and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open > vector[4].close
-                        and vector[3].close < vector[4].open < vector[3].open and vector[3].close < vector[4].close < vector[3].open):
-                    # opzionali M(t) < o(t-1) e m(t) > c(t-1)
+                        and vector[3].close < vector[4].open < vector[3].open and vector[3].close < vector[4].close < vector[3].open
+                        and (vector[4].maxC < vector[3].open or None) and (vector[4].minC > vector[3].close or None)):
                     vector[4].P.append[42]  # Homing Pigeon
                     return
 
