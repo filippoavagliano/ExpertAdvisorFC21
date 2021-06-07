@@ -1,6 +1,6 @@
 import MetaTrader5 as mt5
 from PatternDetector import addCandleToVector, determinePatterns
-import GenCandle
+from GenCandle import GenCandle
 from mt5api import get_bars
 from utils import get_ema, get_bollinger_band
 from utilscandles import get_last_candles, extract_last_candles, get_ocdistances, get_mMdistances
@@ -20,15 +20,15 @@ def main():
     sma, lower, upper = get_bollinger_band(bars, 20)
 
     for i in range(-8,0):
-        with last_candles[i] as c:
-            g=GenCandle(c.open, c.close,
+        c=last_candles[i]
+        g=GenCandle(c.open, c.close,
                c.high, c.low,
                get_mMdistances(last_candles[i-20:i-1]),
                get_ocdistances(last_candles[i-20:i-1]),
                last_candles[i-1].close,
                None,
-               get_ema(last_candles[i-20:i-1], 20))
-            addCandleToVector(g)
+               get_ema(last_candles[i-20:i-1], 18))
+        addCandleToVector(g)
 
     determinePatterns()
 

@@ -27,6 +27,11 @@ class GenCandle:
     avgdmM = 0
     MavgdmM = 0
     mavgdmM = 0
+    Mdoc = 0
+    mdoc = 0
+    avgdoc = 0
+    Mavgdoc = 0
+    mavgdoc = 0
 
     lastClose = 0  # last candle close value
     bollBw = 0  # Bollinger bands bandwidth
