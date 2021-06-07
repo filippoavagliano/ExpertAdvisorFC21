@@ -19,3 +19,4 @@ def determinePatterns():
     ThreePatternDetector.determinePattern(candleVector)
     FourPatternDetector.determinePattern(candleVector)
     FivePatternDetector.determinePattern(candleVector)
+    print(candleVector[-1].P)
