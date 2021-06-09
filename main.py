@@ -20,6 +20,7 @@ def main():
     print(bars)
     # bande di bollinger
     _, lower, upper = get_bollinger_band(bars, 20)
+    #lower = []
     print(lower)
 
     for i in range(-8,0):

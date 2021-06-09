@@ -53,6 +53,11 @@ class GenCandle:
         self.minC = minC
         self.mMdistances = mMdistances
         self.ocdistances = ocdistances
+
+        self.lastClose = lastClose
+        self.bollBw = bollBw
+        self.EMAvalue = EMA
+
         self.doc = abs(open - close)
         self.dmM = abs(maxC - minC)
         self.ts = maxC - max(open, close)
@@ -79,11 +84,6 @@ class GenCandle:
         self.avgdoc = self.calcavgdoc()
         self.Mavgdoc = self.calcMavgdoc()
         self.mavgdoc = self.calcmavgdoc()
-
-        self.lastClose = lastClose
-        self.bollBw = bollBw
-
-        self.EMAvalue = EMA
 
         self.candleType = self.detType()
 

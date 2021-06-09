@@ -3,7 +3,7 @@ class ThreePatternDetector:
     @staticmethod
     def determinePattern(candleVector):
 
-        vector = candleVector[2:7]
+        vector = candleVector[-6:]
         type = vector[5].candleType
 
         if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
@@ -202,7 +202,7 @@ class ThreePatternDetector:
             return
 
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue)
-                and (vector[3].caldleType == 4 or 1) and vector[3].close > vector[3].open and (vector[4].candleType == 1 or 3)
+                and (vector[3].candleType == 4 or 1) and vector[3].close > vector[3].open and (vector[4].candleType == 1 or 3)
                 and vector[4].open > vector[4].close and (vector[5].candleType == 5 or 1)
                 and vector[5].close > vector[5].open and abs(vector[3].maxC - vector[5].maxC) <= 0.1 * ((vector[3].boc + vector[4].boc + vector[5].boc) / 3)
                 and vector[4].boc < vector[3].boc and vector[4].close < vector[3].open and vector[5].open < vector[4].close):

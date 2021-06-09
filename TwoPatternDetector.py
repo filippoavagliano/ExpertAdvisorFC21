@@ -3,7 +3,7 @@ class TwoPatternDetector:
     @staticmethod
     def determinePattern(candleVector):
 
-        vector = candleVector[3:7]
+        vector = candleVector[-5:]
         type = vector[4].candleType
         foundFirstPattern = 0
 
@@ -256,4 +256,4 @@ class TwoPatternDetector:
                     vector[4].P.append(46)  # Bearish Kicking
                     return
 
-
+        vector[4].P.append(0)

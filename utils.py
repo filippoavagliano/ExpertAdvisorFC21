@@ -74,3 +74,6 @@ def plot_bollinger_band(close, sma, lower, upper):
     plt.title('Bollinger Band')
     plt.ylabel('USD Price ($)')
     plt.show()
+
+    print(sma)
+    print(lower)

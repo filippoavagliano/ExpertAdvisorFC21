@@ -3,7 +3,7 @@ class OnePatternDetector:
     @staticmethod
     def determinePattern(candleVector):
 
-        vector = candleVector[4:7]
+        vector = candleVector[-4:]
         type = vector[3].candleType
 
         if type == 12 or type == 13:
