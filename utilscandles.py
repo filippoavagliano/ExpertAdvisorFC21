@@ -20,7 +20,9 @@ def get_ocdistances(candles: List[Candle]):
     Restituisce una lista con i body delle candele passate in input
     :param candles (Candle[])
     """
+
     return [c.get_body() for c in candles]
+
 
 
 def extract_last_candles(df: pandas.DataFrame, n: int) -> List[Candle]:

@@ -82,3 +82,6 @@ class FivePatternDetector:
                 and ((vector[4].minC < vector[5].minC < vector[6].minC) or None)):
             vector[7].P.append(109)          # Bearish Mat Hold
             return
+
+        vector[7].P.append(0)
+        return

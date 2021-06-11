@@ -1,3 +1,6 @@
+import GenCandle
+
+
 class OnePatternDetector:
 
     @staticmethod
@@ -5,6 +8,7 @@ class OnePatternDetector:
 
         vector = candleVector[-4:]
         type = vector[3].candleType
+
 
         if type == 12 or type == 13:
             if vector[3].EMAvalue <= vector[2].EMAvalue <= vector[1].EMAvalue <= vector[0].EMAvalue:
