@@ -5,6 +5,7 @@ class FivePatternDetector:
 
         type = vector[7].candleType
 
+
         if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue >= vector[5].EMAvalue >= vector[6].EMAvalue >= vector[7].EMAvalue)
                 and vector[3].candleType == 1 and vector[3].open > vector[3].close and vector[4].open > vector[4].close and vector[4].open < vector[3].minC and vector[4].close > min(vector[5].open, vector[5].close) > vector[6].close
                 and (vector[7].open < vector[5].close or None) and vector[7].open < vector[7].close and vector[7].close > vector[4].open and vector[6].open < vector[7].close

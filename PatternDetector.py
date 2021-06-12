@@ -24,6 +24,6 @@ def determinePatterns():
     FivePatternDetector.determinePattern(candleVector)
     i = 1
     for c in candleVector:
-        print("Candela numero: ", i, "\n", c.toString())
+        print("Candela numero: ", i, "\n", c.toString(),"\n")
         i += 1
     print(candleVector[-1].P)

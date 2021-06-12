@@ -1,3 +1,11 @@
+from typing import Tuple
+
+    #TODO: Rivedere calcolo di:
+    # CBR, quindi le distanze sulle 20 candele
+    # Tr (è sempre 1)
+    # S va bene
+    # EMA dovrebbe essere un solo valore, ma comunque arrivano valiri errati
+
 class GenCandle:
     open = 0
     close = 0
@@ -95,7 +103,6 @@ class GenCandle:
     def calcS(self):
 
         sr = self.calcSR(self.bs, self.ts)
-        print("sr ", sr)
         if 0.6 < sr <= 1:
             return 2  # High top asimmetry
         if 0.2 < sr <= 0.6:
@@ -236,6 +243,7 @@ class GenCandle:
         if self.CBR >= 4: return 1                                  # 1-Long range
         if self.CBR <= 2: return 2                                  # 2-Short range
 
+
     def toString(self):
 
         print("open ", self.open)
@@ -244,26 +252,34 @@ class GenCandle:
         print("minc ", self.minC)
         print("mMdistance ", self.mMdistances)
         print("oCdistance ", self.ocdistances)
-
+        print("avgdmM ", self.avgdmM)
+        print("MavgdmM ", self.MavgdmM)
+        print("mavgdmM ", self.mavgdmM)
+        print("Mdoc ", self.Mdoc)
+        print("mdoc ", self.mdoc)
+        print("avgdoc ", self.avgdoc)
+        print("Mavgdoc ", self.Mavgdoc)
+        print("mavgdoc ", self.mavgdoc)
         print("lastclose ", self.lastClose)
         print("bollBw ", self.bollBw)
         print("EMAvalue ", self.EMAvalue)
         print("bs ", self.bs)
         print("ts ", self.ts)
-
+        print("Tr ", self.Tr)
         print("doc ", self.doc)
         print("dmM ", self.dmM)
         print("boc ", self.boc)
         print("bmM ", self.bmM)
         print("CBR ", self.CBR)
         print("S ", self.S)
-
         print("mb ", self.mb)
         print("Mb ", self.Mb)
-
         print("MdmM ", self.MdmM)
         print("mdmM ", self.mdmM)
 
         print("candleType ", self.candleType)
         return
+
+
+
 
