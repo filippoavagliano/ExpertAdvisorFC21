@@ -3,7 +3,7 @@ from Candle import Candle
 
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 def get_ema(s: List[Candle], n) -> List:
     """
@@ -17,9 +17,12 @@ def get_ema(s: List[Candle], n) -> List:
     returns a numeric array of the exponential
     moving average
     """
+
+    print(" quante candele?: ", s.__len__())
     # s = array(s)
     ema = []
     j = 1
+
 
     # get n sma first and calculate the next n period ema
     sma = sum(c.close for c in s) / n
@@ -29,14 +32,49 @@ def get_ema(s: List[Candle], n) -> List:
     # EMA(current) = ( (Price(current) - EMA(prev) ) x Multiplier) + EMA(prev)
     ema.append(((s[n].close - sma) * multiplier) + sma)
 
+
     # now calculate the rest of the values
     for i in s[n + 1:]:
         tmp = ((i.close - ema[j]) * multiplier) + ema[j]
         j = j + 1
         ema.append(tmp)
 
+    print("\nARRAY EMA IN UTILS: " , ema)
+
+
     return ema
 
+# def exponentialMovingAverage(data: List[Candle], num):
+#     if (num > len(data)):
+#         raise Exception('Insufficient data for calculation')
+#
+#     data_list = (c.close for c in data)
+#     last_sma = -1
+#     result = {}
+#     for x in range(len(data_list) - num + 1):
+#         series = data_list[x:x + num]
+#         if (last_sma == -1):
+#             result[data_keys[x + num - 1]] = round((sum(series) / num), 2)
+#         else:
+#             current_price = data[data_keys[x + num - 1]]
+#             result[data_keys[x + num - 1]] = round(current_price * 2 / (num + 1) + last_sma * (1 - 2 / (num + 1)), 2)
+#         last_sma = result[data_keys[x + num - 1]]
+#
+#     return result
+
+def ema(values: List[Candle], period):
+    values = np.array(c.close for c in values)
+    print("return ema: ", pd.ewma(values, span=period)[-1])
+    return pd.ewma(values, span=period)[-1]
+
+def calculate_ema(prices : List[Candle], days, smoothing = 2):
+    price_Int = list(c.close for c in prices)
+    print("\n prezzi: ", price_Int)
+    ema = [sum(price_Int[:days]) / days]
+    for price in price_Int[days:]:
+        ema.append((price * (smoothing / (1 + days))) + ema [-1] * (1 - (smoothing / (1 + days))))
+    print("ema ", ema)
+    return ema
 
 def get_bollinger_band(bars: pd.DataFrame, period: int):
     """

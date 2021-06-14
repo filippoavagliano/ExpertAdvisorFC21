@@ -61,11 +61,9 @@ class GenCandle:
         self.minC = minC
         self.mMdistances = mMdistances
         self.ocdistances = ocdistances
-
         self.lastClose = lastClose
         self.bollBw = bollBw
         self.EMAvalue = EMA
-
         self.doc = abs(open - close)
         self.dmM = abs(maxC - minC)
         self.ts = maxC - max(open, close)
@@ -73,15 +71,9 @@ class GenCandle:
         self.boc = (open + close) / 2
         self.bmM = (minC + maxC) / 2
         self.dbb = abs(self.boc - self.bmM)
-        self.S = self.calcS()
         self.r = self.doc / self.dmM
-        self.COR = self.calcCOR()
-        self.CBR = self.calcCBR()
-        self.Tr = self.calcTr()
-
         self.mb = min(open, close)
         self.Mb = max(open, close)
-
         self.MdmM = self.calcMdmM()
         self.mdmM = self.calcmdmM()
         self.avgdmM = self.calcavgdmM()
@@ -92,6 +84,10 @@ class GenCandle:
         self.avgdoc = self.calcavgdoc()
         self.Mavgdoc = self.calcMavgdoc()
         self.mavgdoc = self.calcmavgdoc()
+        self.S = self.calcS()
+        self.COR = self.calcCOR()
+        self.CBR = self.calcCBR()
+        self.Tr = self.calcTr()
 
         self.candleType = self.detType()
 
@@ -103,6 +99,7 @@ class GenCandle:
     def calcS(self):
 
         sr = self.calcSR(self.bs, self.ts)
+        print("Sr ", sr)
         if 0.6 < sr <= 1:
             return 2  # High top asimmetry
         if 0.2 < sr <= 0.6:

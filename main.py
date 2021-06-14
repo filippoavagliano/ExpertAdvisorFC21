@@ -2,7 +2,7 @@ import MetaTrader5 as mt5
 from PatternDetector import addCandleToVector, determinePatterns
 from GenCandle import GenCandle
 from mt5api import get_bars
-from utils import get_ema, get_bollinger_band
+from utils import get_ema, get_bollinger_band, ema, calculate_ema
 from utilscandles import get_last_candles, extract_last_candles, get_ocdistances, get_mMdistances
 
 
@@ -27,11 +27,11 @@ def main():
         c=last_candles[i]
         g=GenCandle(c.open, c.close,
                c.high, c.low,
-               get_mMdistances(last_candles[i-20:i-1]),
-               get_ocdistances(last_candles[i-20:i-1]),
+               get_mMdistances(last_candles[i-20:i]),
+               get_ocdistances(last_candles[i-20:i]),
                last_candles[i-1].close,
                upper[i]-lower[i],
-               get_ema(last_candles[i-20:i-1], 18))
+               calculate_ema(last_candles[i-20:i], 20))
         addCandleToVector(g)
 
     determinePatterns()
