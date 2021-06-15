@@ -1,10 +1,4 @@
-from typing import Tuple
 
-    #TODO: Rivedere calcolo di:
-    # CBR, quindi le distanze sulle 20 candele
-    # Tr (è sempre 1)
-    # S va bene
-    # EMA dovrebbe essere un solo valore, ma comunque arrivano valiri errati
 
 class GenCandle:
     open = 0
@@ -55,35 +49,35 @@ class GenCandle:
 
     def __init__(self, open, close, maxC, minC, mMdistances, ocdistances, lastClose, bollBw, EMA):
 
-        self.open = open
+        self.open = round(open, 5)
         self.close = close
-        self.maxC = maxC
-        self.minC = minC
+        self.maxC = round(maxC, 5)
+        self.minC = round(minC, 5)
         self.mMdistances = mMdistances
         self.ocdistances = ocdistances
         self.lastClose = lastClose
-        self.bollBw = bollBw
-        self.EMAvalue = EMA
-        self.doc = abs(open - close)
-        self.dmM = abs(maxC - minC)
-        self.ts = maxC - max(open, close)
-        self.bs = min(open, close) - minC
-        self.boc = (open + close) / 2
-        self.bmM = (minC + maxC) / 2
-        self.dbb = abs(self.boc - self.bmM)
-        self.r = self.doc / self.dmM
+        self.bollBw = round(bollBw, 5)
+        self.EMAvalue = round(EMA, 5)
+        self.doc = round(abs(open - close), 5)
+        self.dmM = round(abs(maxC - minC), 5)
+        self.ts = round(maxC - max(open, close), 5)
+        self.bs = round(min(open, close) - minC, 5)
+        self.boc = round((open + close) / 2, 5)
+        self.bmM = round((minC + maxC) / 2, 5)
+        self.dbb = round(abs(self.boc - self.bmM), 5)
+        self.r = round(self.doc / self.dmM, 5)
         self.mb = min(open, close)
         self.Mb = max(open, close)
-        self.MdmM = self.calcMdmM()
-        self.mdmM = self.calcmdmM()
-        self.avgdmM = self.calcavgdmM()
-        self.MavgdmM = self.calcMavgdmM()
-        self.mavgdmM = self.calcmavgdmM()
-        self.Mdoc = self.calcMdoc()
-        self.mdoc = self.calcmdoc()
-        self.avgdoc = self.calcavgdoc()
-        self.Mavgdoc = self.calcMavgdoc()
-        self.mavgdoc = self.calcmavgdoc()
+        self.MdmM = round(self.calcMdmM(), 5)
+        self.mdmM = round(self.calcmdmM(), 5)
+        self.avgdmM = round(self.calcavgdmM(), 5)
+        self.MavgdmM = round(self.calcMavgdmM(), 5)
+        self.mavgdmM = round(self.calcmavgdmM(), 5)
+        self.Mdoc = round(self.calcMdoc(), 5)
+        self.mdoc = round(self.calcmdoc(), 5)
+        self.avgdoc = round(self.calcavgdoc(), 5)
+        self.Mavgdoc = round(self.calcMavgdoc(), 5)
+        self.mavgdoc = round(self.calcmavgdoc(), 5)
         self.S = self.calcS()
         self.COR = self.calcCOR()
         self.CBR = self.calcCBR()
@@ -193,29 +187,48 @@ class GenCandle:
         if ddoc == abs(self.doc - self.Mdoc):
             return 5  # very long range
 
+    def removeDPoint(self, n):
+
+        n = str(n)
+        intPart = n.split('.')[0]
+        print("int ", intPart)
+        decPart = n.split('.')[1]
+        print("dec ", decPart)
+
+        n = f"{intPart}{decPart}"
+        if n.__len__()!=6:
+            n = f"{n}{'0'}"
+            print(int(n))
+            return int(n)
+
+        return int(f"{intPart}{decPart}")
+
     def calcTr(self):
 
-        dPip = abs(self.close - self.lastClose)
+        close = self.removeDPoint(self.close)
+        lastClose = self.removeDPoint(self.lastClose)
 
-        if 40 / (3 * self.bollBw) <= dPip < 40 / (2 * self.bollBw):
+        dPip = abs(close - lastClose)
+
+        if (40 / (3 * self.bollBw)) <= dPip < (40 / (2 * self.bollBw)):
             return 5
-        if 40 / (4 * self.bollBw) <= dPip < 40 / (3 * self.bollBw):
+        if (40 / (4 * self.bollBw)) <= dPip < (40 / (3 * self.bollBw)):
             return 4
-        if 40 / (6 * self.bollBw) <= dPip < 40 / (4 * self.bollBw):
+        if (40 / (6 * self.bollBw)) <= dPip < (40 / (4 * self.bollBw)):
             return 3
-        if 40 / (18 * self.bollBw) <= dPip < 40 / (6 * self.bollBw):
+        if (40 / (18 * self.bollBw)) <= dPip < (40 / (6 * self.bollBw)):
             return 2
-        if 0 <= dPip < 40 / (18 * self.bollBw):
+        if 0 <= dPip < (40 / (18 * self.bollBw)):
             return 1
-        if -40 / (18 * self.bollBw) <= dPip < 0:
+        if (-40 / (18 * self.bollBw)) <= dPip < 0:
             return -1
-        if -40 / (6 * self.bollBw) <= dPip < -40 / (18 * self.bollBw):
+        if (-40 / (6 * self.bollBw)) <= dPip < (-40 / (18 * self.bollBw)):
             return -2
-        if -40 / (4 * self.bollBw) <= dPip < -40 / (6 * self.bollBw):
+        if (-40 / (4 * self.bollBw)) <= dPip < (-40 / (6 * self.bollBw)):
             return -3
-        if -40 / (3 * self.bollBw) <= dPip < -40 / (4 * self.bollBw):
+        if (-40 / (3 * self.bollBw)) <= dPip < (-40 / (4 * self.bollBw)):
             return -4
-        if -40 / (2 * self.bollBw) <= dPip < -40 / (3 * self.bollBw):
+        if (-40 / (2 * self.bollBw)) <= dPip < (-40 / (3 * self.bollBw)):
             return -5
 
     def detType(self):
