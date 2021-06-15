@@ -44,35 +44,12 @@ def get_ema(s: List[Candle], n) -> List:
 
     return ema
 
-# def exponentialMovingAverage(data: List[Candle], num):
-#     if (num > len(data)):
-#         raise Exception('Insufficient data for calculation')
-#
-#     data_list = (c.close for c in data)
-#     last_sma = -1
-#     result = {}
-#     for x in range(len(data_list) - num + 1):
-#         series = data_list[x:x + num]
-#         if (last_sma == -1):
-#             result[data_keys[x + num - 1]] = round((sum(series) / num), 2)
-#         else:
-#             current_price = data[data_keys[x + num - 1]]
-#             result[data_keys[x + num - 1]] = round(current_price * 2 / (num + 1) + last_sma * (1 - 2 / (num + 1)), 2)
-#         last_sma = result[data_keys[x + num - 1]]
-#
-#     return result
-
-def ema(values: List[Candle], period):
-    values = np.array(c.close for c in values)
-    print("return ema: ", pd.ewma(values, span=period)[-1])
-    return pd.ewma(values, span=period)[-1]
-
-def calculate_ema(prices : List[Candle], days, smoothing = 2):
+def calculate_ema(prices : List[Candle], n, smoothing = 2):
     price_Int = list(c.close for c in prices)
-    print("\n prezzi: ", price_Int)
-    ema = [sum(price_Int[:days]) / days]
-    for price in price_Int[days:]:
-        ema.append((price * (smoothing / (1 + days))) + ema [-1] * (1 - (smoothing / (1 + days))))
+    print("\n prezzi: ", price_Int, price_Int.__len__())
+    ema = [sum(price_Int[:n]) / n]
+    for price in price_Int[n:]:
+        ema.append((price * (smoothing / (1 + n))) + ema [-1] * (1 - (smoothing / (1 + n))))
     print("ema ", ema)
     return ema
 
