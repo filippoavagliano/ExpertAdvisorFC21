@@ -26,4 +26,5 @@ def determinePatterns():
     for c in candleVector:
         print("Candela numero: ", i, "\n", c.toString(),"\n")
         i += 1
-    print(candleVector[-1].P)
+
+    print("Pattern riconosciuti: ", candleVector[7].P)

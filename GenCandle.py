@@ -241,9 +241,9 @@ class GenCandle:
             return 12                                               # 12-Bullish Paper Umbrella
         if (1 <= self.CBR <= 4) and (self.boc > self.bmM) and self.S == -2 and self.open > self.close:
             return 13                                               # 13-Bearish Paper Umbrella
-        if (1 <= self.CBR <= 4) and (self.boc < self.bmM) and self.S == -2 and self.open < self.close:
+        if (1 <= self.CBR <= 4) and (self.boc < self.bmM) and self.S == 2 and self.open < self.close:
             return 14                                               # 14-Reversal Bullish Paper Umbrella
-        if (1 <= self.CBR <= 4) and (self.boc < self.bmM) and self.S == -2 and self.open > self.close:
+        if (1 <= self.CBR <= 4) and (self.boc < self.bmM) and self.S == 2 and self.open > self.close:
             return 15                                               # 15-Reversal Bearish Paper Umbrella
         if self.CBR == 1 and (-1 <= self.S <= 1): return 8          # 8-Long-legged Doji
         if self.CBR == 1 and self.S >= 1: return 9                  # 9-Gravestone Doji

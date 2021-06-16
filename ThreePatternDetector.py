@@ -89,7 +89,7 @@ class ThreePatternDetector:
             return
 
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue)
-                and vector[3].CBR >= 4 and vector[4].CBR >= 4 and vector[5] >= 4 and vector[3].open > vector[3].close
+                and vector[3].CBR >= 4 and vector[4].CBR >= 4 and vector[5].CBR >= 4 and vector[3].open > vector[3].close
                 and vector[4].open > vector[4].close and vector[5].open > vector[5].close and (vector[3].close > vector[4].close > vector[5].close)
                 and (vector[3].close < vector[4].open < vector[3].open) and (vector[4].close < vector[5].open < vector[4].open)):
             vector[5].P.append(63)          # three red crows
@@ -150,12 +150,12 @@ class ThreePatternDetector:
             return
 
         if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
-                and (vector[4].P[1] == 30 or 32) and (vector[5].open < vector[5].close > vector[3].Mb) and vector[3].boc < vector[5].boc > vector[4].boc):
+                and (vector[4].P[1] == (30 or 32)) and (vector[5].open < vector[5].close > vector[3].Mb) and vector[3].boc < vector[5].boc > vector[4].boc):
             vector[5].P.append(71)          # Three inside up
             return
 
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
-                and (vector[4].P[1] == 31 or 33) and (vector[5].open > vector[5].close < vector[3].mb) and (vector[3].boc > vector[5].boc < vector[4].boc)):
+                and (vector[4].P[1] == (31 or 33)) and (vector[5].open > vector[5].close < vector[3].mb) and (vector[3].boc > vector[5].boc < vector[4].boc)):
             vector[5].P.append(72)          # Three inside down
             return
 

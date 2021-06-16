@@ -14,7 +14,7 @@ class TwoPatternDetector:
         if type == 1:
 
             if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
-                    and vector[3].CBR <= 3 and vector[4] >= 4 and vector[3].open < vector[4].close
+                    and vector[3].CBR <= 3 and vector[4].CBR >= 4 and vector[3].open < vector[4].close
                     and vector[3].close > vector[4].open and vector[3].open > vector[3].close and vector[4].open <
                     vector[4].close):
                 vector[4].P.append(28)  # Bullish Engulfing
@@ -187,13 +187,13 @@ class TwoPatternDetector:
 
         if vector[4].CBR <= 3:
 
-            if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue)
+            if ((vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue)
                     and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open > vector[4].close and vector[3].close < vector[4].open
                     and vector[3].open > vector[3].close and vector[4].open < vector[4].close):
                 vector[4].P.append(30)  # Bullish Harami
                 return
 
-            if ((vector[4].EMAvalue >= vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[0].EMAvalue)
+            if ((vector[3].EMAvalue >= vector[2].EMAvalue >= vector[1].EMAvalue >= vector[0].EMAvalue)
                     and vector[3].CBR >= 4 and vector[4].CBR <= 3 and vector[3].open < vector[4].close and vector[3].close > vector[4].open
                     and vector[3].open < vector[3].close and vector[4].open > vector[4].close):
                 vector[4].P.append(31)  # Bearish Harami
