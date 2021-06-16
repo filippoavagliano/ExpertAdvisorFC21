@@ -7,7 +7,7 @@ class FourPatternDetector:
         type = vector[6].candleType
 
 
-        if (vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue <= vector[5].EMAvalue <= vector[6].EMAvalue
+        if (vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue >= vector[5].EMAvalue >= vector[6].EMAvalue
             and vector[3].candleType == 4 and vector[4].candleType == 4 and vector[5].open > vector[4].close
             and vector[5].maxC > vector[4].close and vector[5].boc < vector[5].bmM and vector[6].maxC > vector[5].maxC
             and vector[6].minC < vector[5].minC and vector[6].bmM > vector[5].bmM):
@@ -46,14 +46,14 @@ class FourPatternDetector:
 
 # Patterns di continuazione
 
-        if (vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue <= vector[5].EMAvalue <= vector[6].EMAvalue
+        if (vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue
             and vector[2].open < vector[2].close and vector[3].open < vector[3].close
             and vector[4].open < vector[4].close and vector[6].close >= max(vector[3].close, vector[4].close, vector[5].close)
             and vector[6].close < vector[2].minC):
             vector[6].P.append(111)         #Three- line strike rialzista
             return
 
-        if (vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue >= vector[3].EMAvalue >= vector[4].EMAvalue >= vector[5].EMAvalue >= vector[6].EMAvalue
+        if (vector[0].EMAvalue >= vector[1].EMAvalue >= vector[2].EMAvalue
             and vector[2].open > vector[2].close and vector[3].open > vector[3].close and vector[4].open > vector[4].close
             and vector[6].open <= min(vector[3].close, vector[4].close, vector[5].close)
             and vector[6].close > vector[2].maxC):
