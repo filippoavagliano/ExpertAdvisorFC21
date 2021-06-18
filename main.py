@@ -1,4 +1,8 @@
+import datetime
+
 import MetaTrader5 as mt5
+from hypothesis.extra import pytz
+
 from PatternDetector import addCandleToVector, determinePatterns
 from GenCandle import GenCandle
 from mt5api import get_bars
@@ -38,6 +42,9 @@ def main():
     determinePatterns()
 
 
+    timezone = pytz.timezone("Etc/UTC")
+    utc_from = datetime.now(tzifo=timezone)
+    currentTick = mt5.copy_ticks_from("EURUSD", utc_from, 1, mt5.COPY_TICKS_ALL)
 
 if __name__ == '__main__':
     main()
