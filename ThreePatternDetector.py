@@ -370,7 +370,7 @@ class ThreePatternDetector:
                 and vector[3].open < vector[3].close
                 and vector[4].open > vector[4].close
                 and vector[4].open > vector[3].close
-                and vector[4] >= vector[3].close
+                and vector[4].open >= vector[3].close
                 and vector[5].open > vector[4].boc
                 and vector[5].open > vector[4].close
                 and vector[5].close >= vector[3].close
@@ -420,7 +420,7 @@ class ThreePatternDetector:
         if ((vector[0].EMAvalue <= vector[1].EMAvalue <= vector[2].EMAvalue <= vector[3].EMAvalue <= vector[4].EMAvalue)
                 and vector[3].CBR >= 4
                 and vector[3].open < vector[3].close
-                and vector[3].dmM > (sum(vector[2].dmM, vector[1].dmM, vector[0].dmM) / 3)   # ???
+                and vector[3].dmM > ( (vector[2].dmM + vector[1].dmM + vector[0].dmM) / 3)   # ???
                 and vector[4].dmM < 0.75 * vector[3].dmM
                 and vector[5].dmM < 0.75 * vector[3].dmM
                 and vector[4].CBR <= 3

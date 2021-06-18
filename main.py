@@ -8,7 +8,7 @@ from utilscandles import extract_last_candles, get_ocdistances, get_mMdistances
 
 def main():
     symbol = "EURUSD"
-    timeframe = mt5.TIMEFRAME_H1
+    timeframe = mt5.TIMEFRAME_M1
     num_of_candles = 100
 
     bars = get_bars(symbol, timeframe, num_of_candles)
